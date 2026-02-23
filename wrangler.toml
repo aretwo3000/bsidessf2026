@@ -1,0 +1,13 @@
+name = "bsides-demo"
+compatibility_date = "2024-01-01"
+pages_build_output_dir = "public"
+
+[[kv_namespaces]]
+binding = "ATTACK_LOG"
+id = "f661d145902d4a5e8473bc88458439ce"
+preview_id = "4feab840f5504ce1aad1bd51eb1361f2"
+
+[vars]
+DEMO_USERNAME = "admin"
+DEMO_PASSWORD = "Password123"
+# TURNSTILE_SECRET is set via: wrangler pages secret put TURNSTILE_SECRET

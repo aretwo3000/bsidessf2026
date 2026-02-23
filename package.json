@@ -1,0 +1,17 @@
+{
+  "name": "bsides-demo",
+  "version": "1.0.0",
+  "description": "BSides SF 2026 — The Great Credential Caper demo site",
+  "scripts": {
+    "dev": "wrangler pages dev public --compatibility-date=2024-01-01",
+    "deploy": "wrangler pages deploy public --project-name=bsides-demo",
+    "reset-log": "curl -X DELETE https://bsides.letsgochristo.com/api/log"
+  },
+  "devDependencies": {
+    "playwright": "^1.58.2",
+    "wrangler": "^3.0.0"
+  },
+  "dependencies": {
+    "rebrowser-playwright": "^1.52.0"
+  }
+}

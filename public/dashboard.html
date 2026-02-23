@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BackStagePass — My Account</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #0a0008; color: #f0e6ff; font-family: 'Georgia', serif; min-height: 100vh;
+      background-image: radial-gradient(ellipse at 20% 50%, rgba(120,40,160,0.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(180,120,20,0.08) 0%, transparent 40%);
+    }
+    .stage-lights { height: 4px; background: linear-gradient(90deg, #8b0000, #c9a020, #8b0000, #c9a020, #8b0000, #c9a020, #8b0000); box-shadow: 0 0 20px rgba(201,160,32,0.6); }
+    nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 40px; border-bottom: 1px solid rgba(201,160,32,0.15); background: rgba(10,0,8,0.8); backdrop-filter: blur(10px); }
+    .nav-logo { font-size: 20px; letter-spacing: 3px; color: #c9a020; text-transform: uppercase; }
+    .nav-user { display: flex; align-items: center; gap: 12px; font-size: 13px; color: rgba(240,230,255,0.5); }
+    .avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #7b2d8b, #c9a020); display: flex; align-items: center; justify-content: center; font-size: 16px; }
+    .main { max-width: 900px; margin: 48px auto; padding: 0 24px; }
+    .ato-alert { background: rgba(180,30,30,0.2); border: 2px solid rgba(255,60,60,0.5); border-radius: 2px; padding: 20px 28px; margin-bottom: 32px; display: flex; align-items: center; gap: 16px; animation: pulse-border 2s ease-in-out infinite; }
+    @keyframes pulse-border {
+      0%, 100% { border-color: rgba(255,60,60,0.5); box-shadow: 0 0 10px rgba(255,60,60,0.1); }
+      50% { border-color: rgba(255,60,60,0.9); box-shadow: 0 0 20px rgba(255,60,60,0.3); }
+    }
+    .ato-alert .alert-icon { font-size: 32px; flex-shrink: 0; }
+    .ato-alert .alert-text h3 { font-size: 16px; color: #ff6060; margin-bottom: 4px; font-weight: normal; letter-spacing: 1px; text-transform: uppercase; }
+    .ato-alert .alert-text p { font-size: 13px; color: rgba(240,230,255,0.6); }
+    .welcome-banner { background: linear-gradient(135deg, rgba(123,45,139,0.2), rgba(201,160,32,0.1)); border: 1px solid rgba(201,160,32,0.3); border-radius: 2px; padding: 32px; margin-bottom: 32px; position: relative; overflow: hidden; }
+    .welcome-banner::before { content: '🎭'; position: absolute; right: 24px; top: 50%; transform: translateY(-50%); font-size: 80px; opacity: 0.15; }
+    .welcome-banner h1 { font-size: 24px; font-weight: normal; color: #c9a020; margin-bottom: 8px; }
+    .welcome-banner p { color: rgba(240,230,255,0.6); font-size: 14px; line-height: 1.6; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-bottom: 32px; }
+    .card { background: rgba(15,5,20,0.8); border: 1px solid rgba(201,160,32,0.15); border-radius: 2px; padding: 20px; }
+    .card-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(240,230,255,0.4); margin-bottom: 8px; }
+    .card-value { font-size: 22px; color: #c9a020; }
+    .card-sub { font-size: 12px; color: rgba(240,230,255,0.4); margin-top: 4px; }
+    .subscriptions h2 { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: rgba(240,230,255,0.5); margin-bottom: 16px; }
+    .show-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
+    .show-item { background: rgba(15,5,20,0.8); border: 1px solid rgba(201,160,32,0.1); border-radius: 2px; padding: 16px; text-align: center; cursor: pointer; transition: border-color 0.2s; }
+    .show-item:hover { border-color: rgba(201,160,32,0.4); }
+    .show-item .show-emoji { font-size: 28px; display: block; margin-bottom: 8px; }
+    .show-item .show-name { font-size: 12px; color: rgba(240,230,255,0.7); }
+    .logout-link { display: block; text-align: center; margin-top: 40px; color: rgba(240,230,255,0.3); font-size: 12px; letter-spacing: 1px; text-decoration: none; }
+    .logout-link:hover { color: rgba(240,230,255,0.6); }
+  </style>
+</head>
+<body>
+  <div class="stage-lights"></div>
+  <nav>
+    <div class="nav-logo">🎭 BackStagePass</div>
+    <div class="nav-user">
+      <span id="nav-username">user@example.com</span>
+      <div class="avatar">🎭</div>
+    </div>
+  </nav>
+  <div class="main">
+    <div class="ato-alert">
+      <div class="alert-icon">⚠️</div>
+      <div class="alert-text">
+        <h3>Account Accessed — AI Agent Login Detected</h3>
+        <p>Turnstile passed. Credentials matched. You're in. <strong>This is what account takeover looks like from the inside.</strong></p>
+      </div>
+    </div>
+    <div class="welcome-banner">
+      <h1>Welcome back, <span id="display-user">subscriber</span>.</h1>
+      <p>Your premium StagePass subscription is active. Enjoy unlimited access to Broadway, West End, and Off-Broadway productions.</p>
+    </div>
+    <div class="grid">
+      <div class="card"><div class="card-label">Subscription</div><div class="card-value">PREMIUM</div><div class="card-sub">Renews March 1, 2026</div></div>
+      <div class="card"><div class="card-label">Payment Method</div><div class="card-value">Visa ••••4231</div><div class="card-sub">Expires 09/27</div></div>
+      <div class="card"><div class="card-label">Shows Watched</div><div class="card-value">47</div><div class="card-sub">This season</div></div>
+    </div>
+    <div class="subscriptions">
+      <h2>Your Saved Shows</h2>
+      <div class="show-list">
+        <div class="show-item"><span class="show-emoji">🎩</span><span class="show-name">Hamilton</span></div>
+        <div class="show-item"><span class="show-emoji">🕯️</span><span class="show-name">Phantom of the Opera</span></div>
+        <div class="show-item"><span class="show-emoji">🏳️</span><span class="show-name">Les Misérables</span></div>
+        <div class="show-item"><span class="show-emoji">💄</span><span class="show-name">Rocky Horror</span></div>
+        <div class="show-item"><span class="show-emoji">🦁</span><span class="show-name">The Lion King</span></div>
+        <div class="show-item"><span class="show-emoji">🕷️</span><span class="show-name">Into the Woods</span></div>
+      </div>
+    </div>
+    <a href="/" class="logout-link">← Sign out</a>
+  </div>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const user = params.get('user') || 'subscriber';
+    document.getElementById('display-user').textContent = user;
+    document.getElementById('nav-username').textContent = user;
+  </script>
+</body>
+</html>
